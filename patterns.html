@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div{
+            background-color: rgb(52, 211, 216);
+            font-family: monospace;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <script>
+            num = Number.parseInt(prompt("Enter number "));
+            document.write("1. <br/><br/>")
+            for(i=num; i>0; i--){ 
+                for(j=num-i; j>0; j--){
+                    document.write("&nbsp;");
+                }
+                for(j=i; j>0; j--){
+                    document.write("*");
+                }
+                document.write("<br/>");
+            }
+            document.write("<br/>2. <br/><br/>");
+            for(i=num, count=1; i>0; i--){
+                for(j=i; j>0; j--, count++){
+                    document.write(count + "&nbsp;");
+                }
+                document.write("<br/>");
+            }
+            document.write("<br/>3. <br/></br>");
+            for(i=num; i>0; i -= 2){
+                astrik = i;
+                space = num-i;
+                for(j=0; j<space; j++){
+                    document.write("&nbsp;")
+                }
+                for(j=0; j<astrik; j++){
+                    document.write("*&nbsp;")
+                }
+                document.write("<br/>")
+            }
+            for(i=2; i<=num; i += 2){
+                astrik = i;
+                space = num-i;
+                for(j=0; j<space; j++){
+                    document.write("&nbsp;")
+                }
+                for(j=0; j<astrik; j++){
+                    document.write("*&nbsp;")
+                }
+                document.write("<br/>")
+            }
+
+            document.write("<br/>4. <br/><br/>");
+            for(i=1; i<=num; i++){
+                for(j=1; j<=num; j++){
+                    if(j == 1 || j == num || i == 1 || i == num){
+                        document.write("*&nbsp;");
+                    }else{
+                        document.write("&nbsp;&nbsp;");
+                    }
+                }
+                document.write("<br/>")
+            }
+            
+            document.write("<br/>5. <br/><br/>");
+            for(i = 1; i<=num; i++){
+                astrik = i;
+                for(j=1; j<=astrik; j++){
+                    document.write("*&nbsp;")
+                }
+                document.write("<br/>");
+            }
+
+            document.write("<br/>6. <br/><br/>");
+            for(i = num; i>0; i--){
+                astrik = i;
+                space = num-i;
+                for(j=1; j<=astrik; j++){
+                    document.write("*&nbsp;")
+                }
+                for(j=1; j<=space; j++){
+                    document.write("&nbsp;&nbsp;")
+                }
+                for(j=1; j<=space; j++){
+                    document.write("&nbsp;&nbsp;")
+                }
+                for(j=1; j<=astrik; j++){
+                    document.write("*&nbsp;")
+                }
+                
+
+                document.write("<br/>");
+            }
+
+            for(i = 1; i<=num; i++){
+                astrik = i;
+                space = num-i;
+                for(j=1; j<=astrik; j++){
+                    document.write("*&nbsp;")
+                }
+                for(j=1; j<=space; j++){
+                    document.write("&nbsp;&nbsp;")
+                }
+                for(j=1; j<=space; j++){
+                    document.write("&nbsp;&nbsp;")
+                }
+                for(j=1; j<=astrik; j++){
+                    document.write("*&nbsp;")
+                }
+                
+
+                document.write("<br/>");
+            }
+
+
+            document.write("<br/>7. <br/><br/>");
+
+            row = num;
+            if(row%2==0){
+                row -= 1;
+            }
+
+            arr = [];
+            for(i=0; i<row; i++){
+                dummy = [];
+                for(j=0; j<(2*row)-1; j++){
+                    dummy.push(0);
+                }
+                arr.push(dummy);
+            }
+
+            i=0;
+            j=Number.parseInt(arr[0].length/2);
+            lastI = 0;
+            astrik = row;
+            count = 0
+            triangles = Number.parseInt(row/2) - 1;
+            while(triangles>0){
+                while(i>=0 && i<arr.length && j>=0 && j<arr[0].length && count <astrik){
+                    arr[i][j] = 1;
+                    i++;
+                    j--;
+                    count++;
+                }
+                triangles--;
+                i = lastI + 2;
+                lastI = i;
+                astrik -= 4;
+                count = 0;
+                j=Number.parseInt(arr[0].length/2)
+
+            }
+
+            i=0;
+            j=Number.parseInt(arr[0].length/2);
+            lastI = 0;
+            astrik = row;
+            count = 0
+            triangles = Number.parseInt(row/2) - 1;
+            while(triangles>0){
+                while(i>=0 && i<arr.length && j>=0 && j<arr[0].length && count <astrik){
+                    arr[i][j] = 1;
+                    i++;
+                    j++;
+                    count++;
+                }
+                triangles--;
+                i = lastI + 2;
+                lastI = i;
+                astrik -= 4;
+                count = 0;
+                j=Number.parseInt(arr[0].length/2)
+
+            }
+            i = row - 1;
+            j = 1;
+            lastJ = j;
+            triangles = Number.parseInt(row/2) - 1;
+            while(triangles>0){
+                if(arr[i][j+1] == 1){
+                    triangles--
+                    continue;
+                }
+                while(arr[i][j] != 1 && j<arr[0].length){
+                    arr[i][j] = 1;
+                    j++;
+                }
+                i-=2;
+                j = lastJ + 4;
+                lastJ = j;
+                triangles--;
+            }
+
+            
+
+
+
+            for(i of arr){
+                for(j of i){
+                    if(j==0){
+                       //document.write("&nbsp;&nbsp;")
+                       document.write(".&nbsp;")
+                    }else{
+                        document.write("*&nbsp;")
+                    }
+                }
+                document.write("<br/>")
+            }
+
+            console.log(arr)
+            
+            
+            
+            
+        </script>
+    </div>
+    
+</body>
+</html>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        num = Number.parseInt(prompt("enter Number : "));
+        n = num;
+        m = 0;
+        for(n=n; n>0; n=Number.parseInt(n/10)){
+            m = m*10 + n%10;
+            console.log(m)
+        }
+        if(m == num){
+            document.write(num + " is pallindrom")
+        }else{
+            document.write(num + " is <b>not</b> pallindrom")
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        num1 = Number.parseInt(prompt("Enter number1 "));
+        num2 = Number.parseInt(prompt("Enter number2 "));
+        min = (num1 < num2) ? num1 : num2;
+        max = (num1 > num2) ? num1 : num2;
+        gcd = 0;
+        for(i=min; i>0; i--){
+            if(min%i == 0 && max%i==0){
+                gcd = i;
+                break;
+            }
+        }
+
+        document.write("gcd of " + num1 + " " + num2 + " is " + gcd);
+    </script>
+    
+</body>
+</html>

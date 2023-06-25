@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        str = prompt("Enter number ")
+        num = Number.parseInt(str);
+        dummyN = num;
+        noOfDigits = str.length;
+        newN = 0;
+        while(dummyN>0){
+            poweredDigit = dummyN%10;
+            for(i=0;i<noOfDigits-1;i++){
+                poweredDigit *= dummyN%10;
+            }
+            newN += poweredDigit;
+            dummyN = Number.parseInt(dummyN/10);
+
+        }
+        if(newN==num){
+            document.write(num+" is armstrog");
+        }else{
+            document.write(num+" is not armstrog");
+        }
+    </script>
+    
+</body>
+</html>

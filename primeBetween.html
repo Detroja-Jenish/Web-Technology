@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        num1 = Number.parseInt(prompt("Enter number 1"));
+        num2 = Number.parseInt(prompt("Enter number 2"));
+        for(i=num1; i<=num2; i++){
+            isPrime = true
+            for(j = 2; j<=i/2; j++){
+                if(i%j == 0){
+                    isPrime = false;
+                }
+            }
+            if(isPrime){
+                document.write(i + " ");
+            }
+            
+        }
+    </script>
+</body>
+</html>
