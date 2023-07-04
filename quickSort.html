@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        numString = prompt("Enter numbers in csv format");
+        nums = numString.split(",")
+        for(i=0; i<nums.length; i++){
+            nums[i] = Number.parseInt(nums[i]);
+        }
+        function quickSort(arr, low, high){
+            if(high <= low){
+                return;
+            }
+            pivote = arr[high];
+            PI = low;
+            for(i=low; i<high-1; i++){
+                if(arr[i]<pivote){
+                    temp = arr[i];
+                    arr[i] = arr[PI]
+                    arr[PI] = temp;
+                    PI++;
+                    console.log(PI)
+                }
+            }
+            console.log("here")
+            temp = arr[PI];
+            arr[PI] = arr[high];
+            arr[high] = temp;
+            quickSort(arr, low, PI-1);
+            quickSort(arr, low, PI+1);
+            console.log(arr);
+        }
+
+        quickSort(nums, 0, nums.length - 1)
+        console.log(nums)
+        </script>
+</body>
+</html>

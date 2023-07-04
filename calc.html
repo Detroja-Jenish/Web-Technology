@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            background: linear-gradient(45deg,rgb(5, 146, 241), rgb(52, 198, 251),rgb(5, 146, 241));
+            background-repeat: no-repeat;
+            height: 100vh;
+        }
+        #calc{
+            margin: auto;
+            width:max-content;
+            border: 1px solid black;
+            display: flex;
+            flex-direction: column;
+            padding: 20px;
+            background: rgba( 2, 2, 2, 0.4 );
+            box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+            backdrop-filter: blur( 4.5px );
+            -webkit-backdrop-filter: blur( 4.5px );
+            border-radius: 2vw;
+            border: 1px solid rgba( 255, 255, 255, 0.18 );
+        }
+        #screen{
+            box-sizing: border-box;
+            width: 30vw;
+            aspect-ratio: 5;
+            border-radius: 5vw;
+            margin-bottom: 40px;
+            display: flex;
+            justify-content: end;
+            align-items: center;
+            padding-right: 20px;
+            
+            background: rgba( 2, 2, 2, 0.4 );
+            box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+            backdrop-filter: blur( 4.5px );
+            -webkit-backdrop-filter: blur( 4.5px );
+            border-radius: 2vw;
+            border: 1px solid rgba( 255, 255, 255, 0.18 );
+        }
+        #scrText{
+
+            height:fit-content;
+            font-size: 3rem;
+            color: white;
+        }
+        #btns-container{
+            width: 30vw;
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        .btn{
+            width: 20%;
+            aspect-ratio: 1;
+            border: 1px solid black;
+            border-radius: 50%;
+            margin:  0.5vw;
+            font-size: x-large;
+            color: white;
+
+        }
+        .middle-btn{
+            margin: 0.5vw 1vw;
+        }
+
+        .lgBtn{
+            width: 45%;
+            aspect-ratio:3;
+            border-radius: 50px;
+        }
+
+        .operators{
+            background-color: rgba(220, 120, 6, 0.8);
+            box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+            backdrop-filter: blur( 4.5px );
+            -webkit-backdrop-filter: blur( 4.5px );
+            border: 1px solid rgba( 255, 255, 255, 0.18 );
+        }
+
+        .dummySpace{
+            background: rgba(255,255,255, 0);
+            border: none;
+        }
+        .numbers{
+            background-color: rgba(14, 148, 237, 0.5);
+            box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+            backdrop-filter: blur( 4.5px );
+            -webkit-backdrop-filter: blur( 4.5px );
+            border: 1px solid rgba( 255, 255, 255, 0.18 );
+        }
+        .numbers:hover{
+            background-color:  rgba(14, 222, 237, 0.5);
+        }
+
+    </style>
+</head>
+<body>
+    <div id="calc">
+        <div id="screen">
+            <div id="scrText"></div>
+        </div>
+        <div id="btns-container">
+            <input type="button" value="AC" onclick="reset()" class="btn numbers">
+            <input type="button" value="+/-" onclick="pressed2(this.value)" class="btn numbers middle-btn"/>
+            <div   class="btn lgBtn dummySpace"></div>
+
+            <input type="button" value="9" onclick="pressed2(this.value)" class="btn numbers"/>
+            <input type="button" value="8" onclick="pressed2(this.value)" class="btn numbers middle-btn"/>
+            <input type="button" value="7" onclick="pressed2(this.value)" class="btn numbers middle-btn"/>
+            <input type="button" value="+" onclick="pressed2(this.value)" class="btn operators">
+
+            <input type="button" value="6" onclick="pressed2(this.value)" class="btn numbers"/>
+            <input type="button" value="5" onclick="pressed2(this.value)" class="btn numbers middle-btn"/>
+            <input type="button" value="4" onclick="pressed2(this.value)" class="btn numbers middle-btn"/>
+            <input type="button" value="-" onclick="pressed2(this.value)" class="btn operators">
+
+            <input type="button" value="3" onclick="pressed2(this.value)" class="btn numbers"/>
+            <input type="button" value="2" onclick="pressed2(this.value)" class="btn numbers middle-btn"/>
+            <input type="button" value="1" onclick="pressed2(this.value)" class="btn numbers middle-btn"/>
+            <input type="button" value="*" onclick="pressed2(this.value)" class="btn operators">
+
+            <input type="button" value="0" onclick="pressed2(this.value)" class="btn numbers lgBtn"/>
+            <input type="button" value="=" onclick="pressed2(this.value)" class="btn numbers middle-btn"/>
+            <input type="button" value="/" onclick="pressed2(this.value)" class="btn operators"/>
+        </div>
+    </div>
+
+    <script>
+        num1 = "";
+        num2 = "";
+        operator = "";
+        isNum1 = false;
+        isNum2 = false;
+        isOperator = false;
+        scrText = document.getElementById("scrText");
+        ans = "";
+        operatorElements = document.getElementsByClassName("operators");
+
+        function pressed(n){
+            if(ans!="" && (n!="-" || n != "+" || n != "*" || n != "/")){
+                reset();
+            }
+            if((n === "=")){
+                ans = myEval(num1, operator, num2);
+                num1 = ans;
+                operator = "";
+                isNum2 = false;
+                num2 = ""
+                scrText.innerText = num1;
+            }else if(isNum2 && (n==="-" || n === "+" || n === "*" || n === "/")){
+                ans = myEval(num1, operator, num2);
+                num1 = ans;
+                num2 = "";
+                isNum2 = false;
+                operator = n; 
+                scrText.innerText = "";
+            }else if(ans!= "" && (n==="-" || n === "+" || n === "*" || n === "/")){
+                num1 = ans;
+                operator = n;
+                isNum2 = false;
+                num2 = "";
+                scrText.innerText = "";
+            }else if((n==="-" || n === "+" || n === "*" || n === "/") && isNum1 && !isOperator){
+                isNum1 = false;
+                isOperator = true;
+                operator = n;
+                scrText.innerText = "";
+            }else if((num1 === "" || isNum1) && n!="=" && n!="+" && n!="*" && n!="/"){
+                if((num1==="" && n==="-") || n!="-"){
+                    console.log(n)
+                    console.log(num1);
+                    num1 += n;
+                    scrText.innerText = num1;
+                    isNum1 = true;
+                }
+                
+            }else if((num2 === "" || isNum2) && n!="=" && n!="+" && n!="*" && n!="/" && isOperator){
+                if((num2==="" && n==="-") || n!="-"){
+                    console.log(n)
+                    console.log(num2);
+                    num2 += n;
+                    scrText.innerText = num2;
+                    isNum2 = true;
+                }
+                
+            }
+        }
+
+        function myEval(n1, op, n2){
+            console.log(num1 + op + num2);
+            if(op === "+"){
+                return Number.parseFloat(n1) + Number.parseFloat(n2);
+            }else if(op === "-"){
+                return Number.parseFloat(n1) - Number.parseFloat(n2);
+            }else if(op === "*"){
+                return Number.parseFloat(n1) * Number.parseFloat(n2);
+            }else if(op === "/"){
+                return Number.parseFloat(n1) / Number.parseFloat(n2);
+            }
+        }
+
+        function reset(){
+                num1 = "";
+                num2 = "";
+                operator = "";
+                ans = "";
+                isNum1 = false;
+                isNum2 = false;
+                isOperator = false;
+                scrText.innerText = "";
+                console.log("reset done")
+                for( ele of operatorElements ){
+                    deactive(ele);
+                }
+        }
+
+        function pressed2(n){
+            
+            if(!(ans === "") && n!="+" && n!="-" && n!="*" && n!="/" && n!="=" && operator === ""){
+                reset();
+            }
+            if(n === "-" && num1 === ""){
+                num1 += n;
+                scrText.innerText = num1;
+            }
+            else if(n === "-" && num2 === "" && !(operator === "")){
+                    num2 += n;
+                    scrText.innerText = num2;
+            }
+            else if((num1 === ""  || isNum1) && (n!="+" && n!="-" && n!="*" && n!="/" && n!="=" )){
+                console.log(1); 
+                if(n === "+/-"){
+                    num1 = -1 * Number.parseFloat(num1);
+                }else{
+                    num1 += n;    
+                }  
+                scrText.innerText = num1;    
+                isNum1 = true;
+            }
+            else if(operator != "" && n!="+" && n!="-" && n!="*" && n!="/" && n!="="){
+                console.log(2);
+                if(n === "+/-"){
+                    num2 = -1 * Number.parseFloat(num2);
+                }else{
+                    num2 += n;
+                }
+                scrText.innerText = num2;
+                isNum2 = true;
+            }
+            else if(n==="+" || n === "-" || n === "*" || n === "/"){
+                console.log(3);
+                if(num2 === ""){
+                    operator = n;
+                    isNum1 = false;
+                    scrText.innerText = "";
+                }
+                else{
+                    ans = myEval(num1, operator, num2);
+                    num1 = ans;
+                    num2 = "";
+                    operator = n;
+                    scrText.innerText = "";
+                }
+                for( ele of operatorElements ){
+                    deactive(ele);
+                    if(ele.value === n){
+                        active(ele);
+                    }
+                }
+            }
+            else if(n === "="){
+                console.log(4);
+                ans = myEval(num1, operator, num2);
+                num1 = ans;
+                num2 = "";
+                operator = "";
+                scrText.innerText = ans;
+                for( ele of operatorElements ){
+                    deactive(ele);
+                }
+            }
+
+        }
+
+        function deactive(ele){
+            ele.style.backgroundColor = "rgba(220, 120, 6, 0.8)";
+        }
+
+        function active(ele){
+            ele.style.backgroundColor = "rgba(235, 182, 6, 0.8)";
+        }
+
+
+
+    </script>
+    
+</body>
+</html>

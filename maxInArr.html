@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        nums = prompt("Enter numbers in csv format");
+        arr = nums.split(",");
+        if(arr.length == 0){
+            document.write("you have either not input number in proper format or not type anything")
+        }else{
+            max = Number.parseInt(arr[0]);
+            for(i=1; i<arr.length; i++){
+                if(max < Number.parseInt(arr[i])){
+                    max = Number.parseInt(arr[i])
+                }
+            }
+
+            document.write("max :- "+max)
+        }
+    </script>
+</body>
+</html>

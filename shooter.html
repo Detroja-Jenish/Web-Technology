@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #score{
+            display: absolute;
+            top:0;
+            left:0;
+        }
+        #target{
+            position: absolute;
+            height: 10vw;
+            aspect-ratio: 1;
+            background-color: brown;
+            transition-duration: 0.3s;
+            border: 1px solid black;
+            border-radius: 5vw;
+        }
+       
+    </style>
+</head>
+<body>
+    
+    <h2> Score: - <span id="score"> 0 </span></h2>
+    <div id="target" onclick="shoot()"></div>
+    <script>
+        score = document.getElementById("score");
+        target = document.getElementById("target");
+        function shoot(){
+            score.innerText = eval(score.innerText + "+1");
+        }
+        function moveRandom(){
+            target.style.top = Math.ceil(Math.random()*100) + "vh";
+            target.style.left = Math.ceil(Math.random()*100) + "vw";       
+        }
+        function changeBg(){
+            target.style.backgroundColor = "rgb("+Math.ceil(Math.random()*255) +","+ Math.ceil(Math.random()*255)+ "," +Math.ceil(Math.random()*255) +")"
+        }
+        setInterval(moveRandom,800)
+        setInterval(changeBg, 1300)
+    </script>
+</body>
+
+</html>
