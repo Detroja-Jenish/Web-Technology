@@ -106,27 +106,27 @@
         </div>
         <div id="btns-container">
             <input type="button" value="AC" onclick="reset()" class="btn numbers">
-            <input type="button" value="+/-" onclick="pressed2(this.value)" class="btn numbers middle-btn"/>
+            <input type="button" value="+/-" onclick="pressed(this.value)" class="btn numbers middle-btn"/>
             <div   class="btn lgBtn dummySpace"></div>
 
-            <input type="button" value="9" onclick="pressed2(this.value)" class="btn numbers"/>
-            <input type="button" value="8" onclick="pressed2(this.value)" class="btn numbers middle-btn"/>
-            <input type="button" value="7" onclick="pressed2(this.value)" class="btn numbers middle-btn"/>
-            <input type="button" value="+" onclick="pressed2(this.value)" class="btn operators">
+            <input type="button" value="9" onclick="pressed(this.value)" class="btn numbers"/>
+            <input type="button" value="8" onclick="pressed(this.value)" class="btn numbers middle-btn"/>
+            <input type="button" value="7" onclick="pressed(this.value)" class="btn numbers middle-btn"/>
+            <input type="button" value="+" onclick="pressed(this.value)" class="btn operators">
 
-            <input type="button" value="6" onclick="pressed2(this.value)" class="btn numbers"/>
-            <input type="button" value="5" onclick="pressed2(this.value)" class="btn numbers middle-btn"/>
-            <input type="button" value="4" onclick="pressed2(this.value)" class="btn numbers middle-btn"/>
-            <input type="button" value="-" onclick="pressed2(this.value)" class="btn operators">
+            <input type="button" value="6" onclick="pressed(this.value)" class="btn numbers"/>
+            <input type="button" value="5" onclick="pressed(this.value)" class="btn numbers middle-btn"/>
+            <input type="button" value="4" onclick="pressed(this.value)" class="btn numbers middle-btn"/>
+            <input type="button" value="-" onclick="pressed(this.value)" class="btn operators">
 
-            <input type="button" value="3" onclick="pressed2(this.value)" class="btn numbers"/>
-            <input type="button" value="2" onclick="pressed2(this.value)" class="btn numbers middle-btn"/>
-            <input type="button" value="1" onclick="pressed2(this.value)" class="btn numbers middle-btn"/>
-            <input type="button" value="*" onclick="pressed2(this.value)" class="btn operators">
+            <input type="button" value="3" onclick="pressed(this.value)" class="btn numbers"/>
+            <input type="button" value="2" onclick="pressed(this.value)" class="btn numbers middle-btn"/>
+            <input type="button" value="1" onclick="pressed(this.value)" class="btn numbers middle-btn"/>
+            <input type="button" value="*" onclick="pressed(this.value)" class="btn operators">
 
-            <input type="button" value="0" onclick="pressed2(this.value)" class="btn numbers lgBtn"/>
-            <input type="button" value="=" onclick="pressed2(this.value)" class="btn numbers middle-btn"/>
-            <input type="button" value="/" onclick="pressed2(this.value)" class="btn operators"/>
+            <input type="button" value="0" onclick="pressed(this.value)" class="btn numbers lgBtn"/>
+            <input type="button" value="=" onclick="pressed(this.value)" class="btn numbers middle-btn"/>
+            <input type="button" value="/" onclick="pressed(this.value)" class="btn operators"/>
         </div>
     </div>
 
@@ -169,7 +169,7 @@
                 }
         }
 
-        function pressed2(n){
+        function pressed(n){
             
             if(!(ans === "") && n!="+" && n!="-" && n!="*" && n!="/" && n!="=" && operator === ""){
                 reset();
