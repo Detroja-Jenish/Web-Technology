@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+         body{
+            background: linear-gradient(45deg,rgb(5, 146, 241), rgb(52, 198, 251),rgb(5, 146, 241));
+            background-repeat: no-repeat;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        #container{
+            width: 80vw;
+            height: 80vh;
+            background: rgba( 2, 2, 2, 0.4 );
+            box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+            backdrop-filter: blur( 4.5px );
+            -webkit-backdrop-filter: blur( 4.5px );
+            border-radius: 2vw;
+        }
+        
+        #snake{
+            position: absolute;
+            width: 100px;
+            aspect-ratio: 1;
+            background-color: green;
+        }
+
+        #apple{
+            position: absolute;
+            width: 100px;
+            aspect-ratio: 1;
+            background-color: rgb(255, 255, 255);
+            border-radius: 50%;
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <div id="snake"></div>
+        <div id="apple"></div>
+    </div>
+
+    <script>
+        container = document.getElementById("container");
+        apple = document.getElementById("apple");
+        snake = document.getElementById("snake");
+        appleRect = apple.getBoundingClientRect();
+        snakeRect = snake.getBoundingClientRect();
+        containerRect = container.getBoundingClientRect();
+        moveInterval = 0;
+        aTop = 0;
+        aLeft = 0;
+        snakeTop = snakeRect.top;
+        snakeLeft = snakeRect.left;
+        function getRandomPosition(){
+            aTop = Math.ceil(Math.random() * containerRect.height + containerRect.top );
+            aLeft =  Math.ceil(Math.random()*containerRect.width + containerRect.left );
+            apple.style.top = aTop + "px";
+            apple.style.left = aLeft + "px";
+        }
+        function moveRight(){
+
+            snakeLeft+=5;
+            snake.style.left = snakeLeft + "px";
+            if(joToKhaiLidhu()){
+                getRandomPosition();
+            }
+        }
+        function moveLeft(){
+            snakeLeft-=5;
+            snake.style.left = snakeLeft + "px";
+            if(joToKhaiLidhu()){
+                getRandomPosition();
+            }
+        }
+        function moveUp(){
+            snakeTop-=5;
+            snake.style.top = snakeTop + "px";
+            if(joToKhaiLidhu()){
+                getRandomPosition();
+            }
+        }
+
+        function moveDown(){
+            snakeTop+=5;
+            snake.style.top = snakeTop + "px";
+            if(joToKhaiLidhu()){
+                getRandomPosition();
+            }
+        }
+        document.addEventListener("keypress", (event) =>{
+            
+            if(event.key == "d"){
+                clearInterval(moveInterval);
+                moveInterval = setInterval(moveRight, 10);
+            }else if(event.key == "a"){
+                clearInterval(moveInterval);
+                moveInterval = setInterval(moveLeft, 10);
+            }else if(event.key == "w"){
+                clearInterval(moveInterval);
+                moveInterval = setInterval(moveUp, 10);
+            }else if(event.key == "s"){
+                clearInterval(moveInterval);
+                moveInterval = setInterval(moveDown, 10);
+
+            }
+        })
+        getRandomPosition()
+
+        function joToKhaiLidhu(){
+            console.log(aLeft, aTop, snakeLeft, snakeTop)
+            if(aLeft < snakeLeft && snakeLeft < (aLeft + 100) && aTop < snakeTop && snakeTop < (aTop + 100)){
+                return true;
+            }else if(aLeft < (snakeLeft + 100) && (snakeLeft + 100) < (aLeft + 100) && aTop < snakeTop && snakeTop < (aTop + 100)){
+                return true;
+            }else if(aLeft < snakeLeft && snakeLeft < (aLeft + 100) && aTop < (snakeTop + 100) && (snakeTop + 100) < (aTop + 100)){
+                return true;
+            }else if(aLeft < (snakeLeft + 100) && (snakeLeft + 100) < (aLeft + 100) && aTop < (snakeTop + 100) && (snakeTop + 100) < (aTop + 100)){
+                return true;
+            }
+
+            return false
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/sweetalert2@10.10.1/dist/sweetalert2.min.css'>
+    <style>
+        body{
+            background-color: black;
+        }
+        #intro{
+            color: white;
+            height: 100vh;
+            font-size: 20px;
+            font-family: 'Courier New', Courier, monospace;
+        }
+        #algo-container{
+            position: relative;
+            background-color: black;
+            height: 2000vh;
+        }
+        #stack{
+            width:50%;
+            height: 100vh;
+            position: sticky;
+            top: 0;
+            background: rgba( 239, 227, 227, 0.2 );
+box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+backdrop-filter: blur( 11px );
+-webkit-backdrop-filter: blur( 11px );
+border-radius: 10px;
+border: 1px solid rgba( 255, 255, 255, 0.18 );
+            float: left;
+        }
+        #algorithms{
+            width: 50%;
+            height: 400vh;
+            position: absolute;
+            right: 0px;
+            float: right;
+            color: azure;
+        }
+        .algo{
+            height: 100vh
+        }
+        .algorithm-content{
+            padding: 10px 50px;
+            font-size: 25px;
+            font-family: 'Courier New', Courier, monospace;
+            color: orange;
+            font-weight: bold;
+        }
+        .stepHeading{
+            color: rgb(44, 189, 247);
+            margin: 15px 0px;
+        }
+        .condition{
+            color: rgb(0, 162, 11);
+        }
+        .return{
+            color: blue;
+        }
+        .function{
+            color:orangered;
+        }
+        .algo>h3{
+            font-size: 30px;
+        }
+        .algo>h1{
+            
+        }
+        .algo{
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            align-items: center;
+        }
+        #stack{
+            display: flex;
+            flex-direction:column-reverse;
+            justify-content: center;
+            align-items: center;
+            
+        }
+        .element{
+            position: relative;
+            width: 100%;
+            aspect-ratio: 1;
+            border-radius: 5%;
+            border: 2px solid black;
+            transition: 1s;
+        }
+        #stackContent{
+            position: absolute;
+            display: flex;
+            flex-direction: column-reverse;
+            width:40%;
+            bottom: 30vh;
+            text-align: center;
+            font-size: 45px;
+            font-weight: bold;
+            transition-duration: 2s;
+        }
+        
+        .operations{
+            margin: 50px 0px;
+            display: flex;
+            height: 50px;
+        }
+        #pushElementColor, #changeX{
+            height: 50px;
+            width: 100px;
+        }
+        #changeByIndex, #peepIth{
+            font-size: 25px;
+            font-weight: 200;
+            text-align: center;
+        }
+        button{
+            height: 100%;
+            aspect-ratio: 3;
+            border-radius: 50px;
+            font-size: 20px;
+            margin: 0px 20px;
+        }
+
+        .element:last-child::after{
+            position: absolute;
+            content: "TOP";
+            text-align: center;
+            width: 60%;
+            font-weight: bold;
+            font-size: 30px;
+            aspect-ratio: 8;
+            background-color: white;
+            transform-origin: 100% 50%;
+            transform: rotateZ(-45deg) translateX(100%) translatey(-25%);
+            right: 0px;
+
+        }
+        
+        
+    </style>
+    
+</head>
+<body>
+    <div id="intro"> 
+        <h1>STACK:-</h1>
+        <h2>stack is a linear data Structure.</h2>
+        <ul>
+            <li>which follow "LIFO" rule "Last in First Out"</li>
+            <li>this dataStructure is very useful in case where we need to evaluate or proceess on data which is arrives at last.</li>
+            <li>as example: every compilers use stack for record function calls.</li>
+            <li>To use stack we need a pointer or refrence that reffer an element that is on top.</li>
+            <li>We can only insert and remove element on top of stack.</li>
+        </ul>
+
+        <p>
+            Now, let's learn some basic Procedure and algorithms for stack.
+            <br> In which <strong>Stack</strong> is represented by <strong>Vector S</strong>.
+            <br> <strong>TOP</strong> represents Top most element of Stack.
+            <br> <strong>SIZE</strong> represents size of stack.
+        </p>
+    </div>
+    <div id="algo-container">
+        <div id="stack">
+            <div id="stackContent">
+
+                
+            </div>
+        </div>
+        <div id="algorithms">
+            
+
+            
+
+            <div class="algo" id="push">
+                <h1>Procedure : Push(S, TOP, X)</h1>
+                <h3>This algorithm insert element <strong>X</strong> at top of the stack</h3>
+                <div class="algorithm-content">
+                    <div class="stepHeading">[1. cheak for overFlow ]</div>
+                    &nbsp;&nbsp;&nbsp;&nbsp;<span class='condition'>If</span> TOP = SIZE<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;<span class="condition">Then</span> <span class="function">Write</span> "Stack overflow"<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="function">Exit</span><br>
+                    <div class="stepHeading">[2. increment TOP]</div>
+                    &nbsp;&nbsp;&nbsp;&nbsp;TOP <- TOP + 1<br>
+                    <div class="stepHeading">[3. Insert Element]</div>
+                    &nbsp;&nbsp;&nbsp;&nbsp;S[ TOP ] <- X <br>
+                    <div class="stepHeading">[4. Finished]</div>
+                    &nbsp;&nbsp;&nbsp;&nbsp; <span class="return">return</span>
+                </div>
+                <div class="operations">
+                    <input type="color" id="pushElementColor" value="#ff00ff"/>
+                    <button onclick="pushBy()"> push </button>
+                </div>
+            </div>
+
+            <div class="algo" id="pop">
+                <h1>Function : POP( S, TOP )</h1>
+                <h3>This function returns and removes top element from the stack</h3>
+                <div class="algorithm-content">
+                    <div class="stepHeading">[1. cheak for underFlow ]</div>
+                    &nbsp;&nbsp;&nbsp;&nbsp;<span class='condition'>If</span> TOP = 0<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;<span class='condition'>Then</span> <span class="function">Write</span> "Stack underflow"<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="function">Exit</span><br>
+                    <div class="stepHeading">[2. Decrement TOP]</div>
+                    &nbsp;&nbsp;&nbsp;&nbsp;TOP <- TOP - 1<br>
+                    <div class="stepHeading">[3. Return Top Element ]</div>
+                    &nbsp;&nbsp;&nbsp;&nbsp;<span class='return'>return</span> S[ TOP + 1 ]
+                </div>
+                <div class="operations">
+                    <button onclick="pop()">Pop</button>
+                </div>
+            </div>
+
+            <div class="algo" id="peep">
+                <h1>Function : PEEP( S, TOP, I )</h1>
+                <h3>This function returns I<sup>th</sup> element from the stack</h3>
+                <div class="algorithm-content">
+                    <div class="stepHeading">[1. cheak for underFlow ]</div>
+                    &nbsp;&nbsp;&nbsp;&nbsp;<span class='condition'>If</span> I > TOP<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;<span class='condition'>Then</span> <span class="function">Write</span> "Stack underflow"
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="function">Exit</span><br>
+                    <div class="stepHeading">[2. Return I<sup>th</sup> Element ]</div>
+                    &nbsp;&nbsp;&nbsp;&nbsp;<span class='return'>return</span> S[ TOP - I + 1 ]
+                </div>
+                <div class="operations">
+                    <input type="number" id="peepIth"/>
+                    <button onclick="peep()">Peep</button>
+                </div>
+            </div>
+            
+            <div class="algo" id="change">
+                <h1>Procedure: Change( S, TOP, X, I)</h1>
+                <h3> This procedure change <strong>I<sup>th</sup> </strong>element's value to <stong>X</stong></h3>
+                <div class="algorithm-content">
+                    <div class="stepHeading">[1. cheak for underFlow ]</div>
+                    &nbsp;&nbsp;&nbsp;&nbsp;<span class='condition'>If</span> I > TOP<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;<span class='condition'>Then</span> <span class="function">Write</span> "Stack underflow"
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="function">Exit</span><br>
+                    <div class="stepHeading">[2. Change I<sup>th</sup> Element ]</div>
+                    &nbsp;&nbsp;&nbsp;&nbsp; S[ TOP - I + 1 ] <- X
+                    <div class="stepHeading">[3. Finished]</div>
+                    &nbsp;&nbsp;&nbsp;&nbsp; <span class="return">return</span>
+                </div>
+                <div class="operations">
+                    <input type="number" id="changeByIndex"/>
+                    <input type="color" id="changeX" value="#ff00ff"/>
+                    <button onclick="change()">Change</button>
+                </div>
+            </div>
+            <div class="algo" id="traverse"></div>
+            <div class="algo" id="isStackEmpty">
+                <h1>algorithm : isStackEmpty(S, TOP)</h1>
+                <h3>this algorithm returns boolean </h3>
+                <div class="algorithm-content">
+                    
+                        <div class="stepHeading">[1. check value of top]</div> <br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="condition">If</span> TOP = 0 <br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="condition">Then</span> <span class="return">return</span> true <br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="condition">Else</span> <span class="return">return</span> false <br>
+                    
+                    
+                </div>
+                <div class="operations">
+                    <button onclick="isStackEmpty()" value="isStackEmpty">isStackEmpty</button>
+                    <div id="msg"></div>
+                </div>
+            </div>
+            <div class="algo" id="isStackFull">
+                <h1>algorithm : isStackFull(S, TOP)</h1>
+                <h3>this algorithm returns boolean </h3>
+                <div class="algorithm-content">
+                    
+                        <div class="stepHeading">[1. check value of top]</div> <br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="condition">If</span> TOP = SIZE <br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="condition">Then</span> <span class="return">return</span> true <br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="condition">Else</span> <span class="return">return</span> false <br>
+                    
+                    
+                </div>
+                <div class="operations">
+                    <button onclick="isStackEmpty()" value="isStackEmpty">isStackEmpty</button>
+                    <div id="msg"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        elements = document.getElementsByClassName("element");
+        translateY = 0;
+        size = 5;
+        console.log(screen.availHeight)
+        stackContent = document.getElementById("stackContent");
+        slideInterval = 0;
+        function pop(){
+            if(elements.length == 0){
+                swal.fire("stack is Empty. no elements for pop");
+                return
+            }
+            stack = ""
+            for(i=0; i<elements.length - 1; i++){
+                stack += getHtmlOfElement( elements[i].innerHTML , i )
+            }
+            stackContent.innerHTML = stack;
+            if(elements.length == 0){
+                
+                stackContent.innerHTML = "Stack is Empty"
+            }
+        }
+
+        function getHtmlOfElement(color, i){
+            html = ""
+            boxShadow = "";
+            for(j = 1; j<13; j++){
+                boxShadow += j + "px " + j + "px " + color + ", ";
+            }
+            boxShadow += "13px 13px black";
+            html = "<div class='element' style=' background-color:" + color +"; box-shadow: "+ boxShadow + "; transform: translateY("+(translateY*i)+"px) rotateZ(45deg)'> "+ color +"</div>" 
+            return html
+        }
+
+        function push(color){
+            if(elements.length == 5){
+                swal.fire("stack is overflow")
+                return
+            }
+            if(elements.length == 0){
+                stackContent.innerHTML = getHtmlOfElement(color, elements.length);
+            }else{
+            stackContent.innerHTML += getHtmlOfElement(color, elements.length);
+            }
+        }
+
+        function pushBy(){
+            color = document.getElementById("pushElementColor").value;
+            push(color);
+        }
+
+        function peep(){
+            I = Number.parseInt(document.getElementById("peepIth").value)
+            if(I > elements.length){
+                swal.fire("stack underFlow")
+                return
+            }
+            for(i=elements.length-1; i>-1; i--){
+                
+                if(elements.length - I  == i){
+                    element = elements[i]
+                    moveSlide(element, 150)
+                    setTimeout(()=>{
+                        clearInterval(slideInterval)
+                        console.log("done")
+                        moveSlide(element,0),
+                        console.log("done2")},4000)
+                    
+                }
+                
+            }
+            
+
+            
+        }
+
+        function moveSlide(element, increment){
+           
+            topPos = Number.parseInt( element.getAttribute("style").split("transform: ")[1].split(" ")[0].split("deg")[0].split("(")[1])
+            slide = 0
+            //for(i=1; i<50; i++){
+                //slide+=increment;
+                s = element.getAttribute("style").split("transform: ")[0] + "transform: translateY(" + topPos + "px) translateX("+increment+"px) rotate(45deg)" ;
+                element.style = s;
+                //s = element.getAttribute("style").split("transform: ")[0] + "transform: translateY(" + topPos + "px) translateX("+0+"px) rotate(45deg)" ;
+               // element.style = s;
+            //}
+            return 0;
+        }
+
+        function moveDown(ele){
+            console.log("movedown")
+            console.log(ele.getAttribute("style"))
+            topPos = Number.parseInt( elements[ elements.length - 1 ].getAttribute("style").split("transform: ")[1].split(" ")[0].split("deg")[0].split("(")[1])
+            console.log(topPos)
+            for(i=1; i<50; i++){
+                topPos++;
+                s = ele.getAttribute("style").split("transform: ")[0] + "transform: translateY(" + topPos + "px) rotate(45deg)";
+                ele.style = s;
+            }
+            console.log(s)
+            console.log(ele.getAttribute("style"))
+        }
+
+        function change(){
+            console.log("change fire")
+            I = Number.parseInt(document.getElementById("changeByIndex").value);
+            color = document.getElementById("changeX").value
+            if(I > elements.length){
+                swal.fire("stack underflow");
+                return;
+            }
+            stack = ""
+            for(i=0; i<elements.length; i++){
+                if(elements.length - I == i){
+                    stack += getHtmlOfElement( color , i )
+                }else{
+                    stack += getHtmlOfElement( elements[i].innerHTML , i );
+                }
+            }
+            stackContent.innerHTML = stack;
+
+        }
+        
+        translateY = 0;
+        push("red");
+        ElementRect = elements[0].getBoundingClientRect();
+        console.log(ElementRect)
+        translateY = (ElementRect.height/2) + (ElementRect.height/10)
+        
+        
+        
+
+    </script>
+</body>
+</html>

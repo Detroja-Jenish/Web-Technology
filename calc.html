@@ -106,27 +106,27 @@
         </div>
         <div id="btns-container">
             <input type="button" value="AC" onclick="reset()" class="btn numbers">
-            <input type="button" value="+/-" onclick="pressed(this.value)" class="btn numbers middle-btn"/>
+            <input type="button" value="+/-" onclick="pressed2(this.value)" class="btn numbers middle-btn"/>
             <div   class="btn lgBtn dummySpace"></div>
 
-            <input type="button" value="9" onclick="pressed(this.value)" class="btn numbers"/>
-            <input type="button" value="8" onclick="pressed(this.value)" class="btn numbers middle-btn"/>
-            <input type="button" value="7" onclick="pressed(this.value)" class="btn numbers middle-btn"/>
-            <input type="button" value="+" onclick="pressed(this.value)" class="btn operators">
+            <input type="button" value="9" onclick="pressed2(this.value)" class="btn numbers"/>
+            <input type="button" value="8" onclick="pressed2(this.value)" class="btn numbers middle-btn"/>
+            <input type="button" value="7" onclick="pressed2(this.value)" class="btn numbers middle-btn"/>
+            <input type="button" value="+" onclick="pressed2(this.value)" class="btn operators">
 
-            <input type="button" value="6" onclick="pressed(this.value)" class="btn numbers"/>
-            <input type="button" value="5" onclick="pressed(this.value)" class="btn numbers middle-btn"/>
-            <input type="button" value="4" onclick="pressed(this.value)" class="btn numbers middle-btn"/>
-            <input type="button" value="-" onclick="pressed(this.value)" class="btn operators">
+            <input type="button" value="6" onclick="pressed2(this.value)" class="btn numbers"/>
+            <input type="button" value="5" onclick="pressed2(this.value)" class="btn numbers middle-btn"/>
+            <input type="button" value="4" onclick="pressed2(this.value)" class="btn numbers middle-btn"/>
+            <input type="button" value="-" onclick="pressed2(this.value)" class="btn operators">
 
-            <input type="button" value="3" onclick="pressed(this.value)" class="btn numbers"/>
-            <input type="button" value="2" onclick="pressed(this.value)" class="btn numbers middle-btn"/>
-            <input type="button" value="1" onclick="pressed(this.value)" class="btn numbers middle-btn"/>
-            <input type="button" value="*" onclick="pressed(this.value)" class="btn operators">
+            <input type="button" value="3" onclick="pressed2(this.value)" class="btn numbers"/>
+            <input type="button" value="2" onclick="pressed2(this.value)" class="btn numbers middle-btn"/>
+            <input type="button" value="1" onclick="pressed2(this.value)" class="btn numbers middle-btn"/>
+            <input type="button" value="*" onclick="pressed2(this.value)" class="btn operators">
 
-            <input type="button" value="0" onclick="pressed(this.value)" class="btn numbers lgBtn"/>
-            <input type="button" value="=" onclick="pressed(this.value)" class="btn numbers middle-btn"/>
-            <input type="button" value="/" onclick="pressed(this.value)" class="btn operators"/>
+            <input type="button" value="0" onclick="pressed2(this.value)" class="btn numbers lgBtn"/>
+            <input type="button" value="=" onclick="pressed2(this.value)" class="btn numbers middle-btn"/>
+            <input type="button" value="/" onclick="pressed2(this.value)" class="btn operators"/>
         </div>
     </div>
 
@@ -140,6 +140,56 @@
         scrText = document.getElementById("scrText");
         ans = "";
         operatorElements = document.getElementsByClassName("operators");
+
+        function pressed(n){
+            if(ans!="" && (n!="-" || n != "+" || n != "*" || n != "/")){
+                reset();
+            }
+            if((n === "=")){
+                ans = myEval(num1, operator, num2);
+                num1 = ans;
+                operator = "";
+                isNum2 = false;
+                num2 = ""
+                scrText.innerText = num1;
+            }else if(isNum2 && (n==="-" || n === "+" || n === "*" || n === "/")){
+                ans = myEval(num1, operator, num2);
+                num1 = ans;
+                num2 = "";
+                isNum2 = false;
+                operator = n; 
+                scrText.innerText = "";
+            }else if(ans!= "" && (n==="-" || n === "+" || n === "*" || n === "/")){
+                num1 = ans;
+                operator = n;
+                isNum2 = false;
+                num2 = "";
+                scrText.innerText = "";
+            }else if((n==="-" || n === "+" || n === "*" || n === "/") && isNum1 && !isOperator){
+                isNum1 = false;
+                isOperator = true;
+                operator = n;
+                scrText.innerText = "";
+            }else if((num1 === "" || isNum1) && n!="=" && n!="+" && n!="*" && n!="/"){
+                if((num1==="" && n==="-") || n!="-"){
+                    console.log(n)
+                    console.log(num1);
+                    num1 += n;
+                    scrText.innerText = num1;
+                    isNum1 = true;
+                }
+                
+            }else if((num2 === "" || isNum2) && n!="=" && n!="+" && n!="*" && n!="/" && isOperator){
+                if((num2==="" && n==="-") || n!="-"){
+                    console.log(n)
+                    console.log(num2);
+                    num2 += n;
+                    scrText.innerText = num2;
+                    isNum2 = true;
+                }
+                
+            }
+        }
 
         function myEval(n1, op, n2){
             console.log(num1 + op + num2);
@@ -169,8 +219,10 @@
                 }
         }
 
-        function pressed(n){
-            
+        function pressed2(n){
+            if(ans === "Nan"){
+                reset();
+            }
             if(!(ans === "") && n!="+" && n!="-" && n!="*" && n!="/" && n!="=" && operator === ""){
                 reset();
             }
