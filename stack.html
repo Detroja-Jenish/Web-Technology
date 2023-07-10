@@ -90,6 +90,7 @@ border: 1px solid rgba( 255, 255, 255, 0.18 );
             border-radius: 5%;
             border: 2px solid black;
             transition: 1s;
+            opacity: 0.5;
         }
         #stackContent{
             position: absolute;
@@ -324,7 +325,7 @@ border: 1px solid rgba( 255, 255, 255, 0.18 );
 
         function push(color){
             if(elements.length == 5){
-                swal.fire("stack is overflow")
+                swal.fire("stack overflow")
                 return
             }
             if(elements.length == 0){
