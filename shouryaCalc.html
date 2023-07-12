@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="clac">
+        <div id="screen">
+
+        </div>
+        <div id="btn-body">
+            <button onclick="display('1')">1</button>
+            <button onclick="display('2')">2</button>
+            <button onclick="display('3')">3</button>
+            <button onclick="display('4')">4</button>
+            <button onclick="display('5')">5</button>
+            <button onclick="display('6')">6</button>
+            <button onclick="display('7')">7</button>
+            <button onclick="display('8')">8</button>
+            <button onclick="display('9')">9</button>
+            <button onclick="display('+')">+</button>
+            <button onclick="display('-')">-</button>
+            <button onclick="display('/')">/</button>
+            <button onclick="display('*')">*</button>
+            <button onclick="display('=')">=</button>
+            <button onclick="clr()">clr</button>
+        </div>
+    </div>
+    <script>
+        screen = document.getElementById("screen");
+        num1 = "";
+        num2 = "";
+        operator = "";
+        ans = 0;
+
+        function display( str ){
+            console.log("hello")
+            if(str === "="){
+                myEvaluation(num1, operator, num2);
+            }else if(str === "+" || str === '-' || str === "*" || str === "/"){
+                operator = str;
+                screen.innerHTML+=str;
+            }else if(operator === ""){
+                num1 += str;
+                screen.innerHTML+=str;
+            }else if(operator != ""){
+                num2 += str;
+                screen.innerHTML+=str;
+            }
+        }
+
+        function myEvaluation(n, op, m){
+            if(op === "+"){
+                ans = Number.parseFloat(n)+ Number.parseFloat(m);
+            }else if(op === "-"){
+                ans = Number.parseFloat(n)- Number.parseFloat(m);
+            }else if(op === "*"){
+                ans = Number.parseFloat(n)* Number.parseFloat(m);
+            }else if(op === "/"){
+                ans = Number.parseFloat(n)/ Number.parseFloat(m);
+            }
+            screen.innerHTML = ans;
+        }
+
+        function clr(){
+            screen.innerHTML = " ";
+        }
+
+        
+
+        
+    </script>
+</body>
+</html>

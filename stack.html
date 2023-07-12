@@ -18,7 +18,7 @@
         #algo-container{
             position: relative;
             background-color: black;
-            height: 2000vh;
+            height: 650vh;
         }
         #stack{
             width:50%;
@@ -26,11 +26,11 @@
             position: sticky;
             top: 0;
             background: rgba( 239, 227, 227, 0.2 );
-box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
-backdrop-filter: blur( 11px );
--webkit-backdrop-filter: blur( 11px );
-border-radius: 10px;
-border: 1px solid rgba( 255, 255, 255, 0.18 );
+            box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+            backdrop-filter: blur( 11px );
+            -webkit-backdrop-filter: blur( 11px );
+            border-radius: 10px;
+            border: 1px solid rgba( 255, 255, 255, 0.18 );
             float: left;
         }
         #algorithms{
@@ -75,6 +75,7 @@ border: 1px solid rgba( 255, 255, 255, 0.18 );
             flex-direction: column;
             justify-content: flex-end;
             align-items: center;
+            height: 100vh;
         }
         #stack{
             display: flex;
@@ -90,7 +91,7 @@ border: 1px solid rgba( 255, 255, 255, 0.18 );
             border-radius: 5%;
             border: 2px solid black;
             transition: 1s;
-            opacity: 0.5;
+
         }
         #stackContent{
             position: absolute;
@@ -138,7 +139,6 @@ border: 1px solid rgba( 255, 255, 255, 0.18 );
             transform-origin: 100% 50%;
             transform: rotateZ(-45deg) translateX(100%) translatey(-25%);
             right: 0px;
-
         }
         
         
@@ -192,7 +192,7 @@ border: 1px solid rgba( 255, 255, 255, 0.18 );
                     &nbsp;&nbsp;&nbsp;&nbsp; <span class="return">return</span>
                 </div>
                 <div class="operations">
-                    <input type="color" id="pushElementColor" value="#ff00ff"/>
+                    <input type="color" id="pushElementColor" value="#94e3fe"/>
                     <button onclick="pushBy()"> push </button>
                 </div>
             </div>
@@ -227,7 +227,7 @@ border: 1px solid rgba( 255, 255, 255, 0.18 );
                     &nbsp;&nbsp;&nbsp;&nbsp;<span class='return'>return</span> S[ TOP - I + 1 ]
                 </div>
                 <div class="operations">
-                    <input type="number" id="peepIth"/>
+                    <input type="number" id="peepIth" value="1"/>
                     <button onclick="peep()">Peep</button>
                 </div>
             </div>
@@ -241,17 +241,17 @@ border: 1px solid rgba( 255, 255, 255, 0.18 );
                     &nbsp;&nbsp;&nbsp;&nbsp;<span class='condition'>Then</span> <span class="function">Write</span> "Stack underflow"
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="function">Exit</span><br>
                     <div class="stepHeading">[2. Change I<sup>th</sup> Element ]</div>
-                    &nbsp;&nbsp;&nbsp;&nbsp; S[ TOP - I + 1 ] <- X
+                    &nbsp;&nbsp;&nbsp;&nbsp; S[ TOP - I + 1 ] <- X<br>
                     <div class="stepHeading">[3. Finished]</div>
                     &nbsp;&nbsp;&nbsp;&nbsp; <span class="return">return</span>
                 </div>
                 <div class="operations">
-                    <input type="number" id="changeByIndex"/>
+                    <input type="number" id="changeByIndex" value="1"/>
                     <input type="color" id="changeX" value="#ff00ff"/>
                     <button onclick="change()">Change</button>
                 </div>
             </div>
-            <div class="algo" id="traverse"></div>
+
             <div class="algo" id="isStackEmpty">
                 <h1>algorithm : isStackEmpty(S, TOP)</h1>
                 <h3>this algorithm returns boolean </h3>
@@ -282,7 +282,7 @@ border: 1px solid rgba( 255, 255, 255, 0.18 );
                     
                 </div>
                 <div class="operations">
-                    <button onclick="isStackEmpty()" value="isStackEmpty">isStackEmpty</button>
+                    <button onclick="isStackFull()" value="isStackEmpty">isStackFull</button>
                     <div id="msg"></div>
                 </div>
             </div>
@@ -333,6 +333,7 @@ border: 1px solid rgba( 255, 255, 255, 0.18 );
             }else{
             stackContent.innerHTML += getHtmlOfElement(color, elements.length);
             }
+            document.getElementById("pushElementColor").value = randomColor();
         }
 
         function pushBy(){
@@ -355,7 +356,7 @@ border: 1px solid rgba( 255, 255, 255, 0.18 );
                         clearInterval(slideInterval)
                         console.log("done")
                         moveSlide(element,0),
-                        console.log("done2")},4000)
+                        console.log("done2")},2000)
                     
                 }
                 
@@ -410,11 +411,39 @@ border: 1px solid rgba( 255, 255, 255, 0.18 );
                 }
             }
             stackContent.innerHTML = stack;
+            document.getElementById("changeX").value = randomColor()
 
+        }
+
+        function isStackEmpty(){
+            if(elements.length == 0){
+                swal.fire("stack is Empty");
+            }
+            else{
+                swal.fire("stack is not Empty");
+            }
+        }
+
+        function isStackFull(){
+            if(elements.length == 5){
+                swal.fire("stack is Full");
+            }
+            else{
+                swal.fire("stack is not Full");
+            }
+        }
+
+        function randomColor(){
+            hexs = ["0","1","2","3","4",'5',"6","7","8","9","a","b","c","d","e","f","0","1","2","3","4",'5',"6","7","8","9","a","b","c","d","e","f"]
+            rColor = "#";
+            for(i = 0; i<6; i++){
+                rColor += hexs[ Math.ceil(Math.random()*30)];
+            }
+            return rColor;
         }
         
         translateY = 0;
-        push("red");
+        push( randomColor() );
         ElementRect = elements[0].getBoundingClientRect();
         console.log(ElementRect)
         translateY = (ElementRect.height/2) + (ElementRect.height/10)
